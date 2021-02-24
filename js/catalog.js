@@ -12,9 +12,11 @@ function populateForm() {
   //TODO: Add an <option> tag inside the form's select for each product
   const selectElement = document.getElementById('items');
   for (let i in Product.allProducts) {
-
+    let optionEl = document.createElement('option');
+    optionEl.textContent = `${Product.allProducts[i].name}`;
+    optionEl.value = `${Product.allProducts[i].name}`;
+    selectElement.appendChild(optionEl);
   }
-
 }
 
 // When someone submits the form, we need to add the selected item to the cart
@@ -23,7 +25,7 @@ function populateForm() {
 function handleSubmit(event) {
 
   // TODO: Prevent the page from reloading
-
+  event.preventDefault();
   // Do all the things ...
   addSelectedItemToCart();
   cart.saveToLocalStorage();
@@ -35,17 +37,34 @@ function handleSubmit(event) {
 // TODO: Add the selected item and quantity to the cart
 function addSelectedItemToCart() {
   // TODO: suss out the item picked from the select list
+  let selectedItem = document.getElementById('items').value;
   // TODO: get the quantity
+  let qItem = document.getElementById('quantity').value;
+  
   // TODO: using those, add one item to the Cart
+  let newItem = new CartItem(selectedItem, qItem);
+  cart.items.push(newItem);
 }
 
 // TODO: Update the cart count in the header nav with the number of items in the Cart
-function updateCounter() {}
+function updateCounter() {
+  let counterEl = document.getElementById('itemCount');
+  counterEl.textContent = `${cart.items.length}`;
+}
 
 // TODO: As you add items into the cart, show them (item & quantity) in the cart preview div
+let divElm = document.getElementById('cartContents');
+let ulElm = document.createElement('ul');
+divElm.appendChild(ulElm);
+
 function updateCartPreview() {
   // TODO: Get the item and quantity from the form
+  let selectedItem = document.getElementById('items').value;
+  let itemQ = document.getElementById('quantity').value;
   // TODO: Add a new element to the cartContents div with that information
+  let liElm = document.createElement('li');
+  ulElm.appendChild(liElm);
+  liElm.textContent=`${itemQ}: ${selectedItem}`;
 }
 
 // Set up the "submit" event listener on the form.
