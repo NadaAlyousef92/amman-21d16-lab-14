@@ -199,3 +199,26 @@ label span {
   color: red;
   cursor: pointer;
 }
+
+#itemImg{
+  width: 100px;
+  height:100px;
+}
+
+#message {
+  font-size: xx-large;
+  color: teal;
+  font-family: 'Courier New', Courier, monospace;
+  text-align: center;
+  animation: spin 8s infinite;
+  -webkit-animation: infinite-spinning 1s infinite;
+}
+
+@keyframes infinite-spinning {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+} 
